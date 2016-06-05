@@ -1,5 +1,5 @@
 # dumpmon_tweeter_scraper
-This script monitors the Dumpmon Bot Twitter page, and saves the pastes posted by it.
+This script monitors the Dumpmon Bot Twitter page, (https://twitter.com/dumpmon, written by Jordan Wright) and saves the pastes posted by it.
 
 This script was written and tested in Windows 7 x64 using Python v2.7.11 win32.
 
