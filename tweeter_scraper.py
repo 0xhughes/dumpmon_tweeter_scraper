@@ -11,8 +11,8 @@ def menu():
 		print "[ - ] Please enter absolute path to output directory: "
 		in_path = raw_input()+"\\tweeter_scraper_out"
 		if os.path.exists(in_path):
-			sane = 0
 			pass
+			sane = 0
 		else:
 			try:
 				os.mkdir(in_path)
@@ -59,6 +59,12 @@ def main(in_path):
 				except urllib2.HTTPError:
 					print "[ - ] 404, "+targ+", skipping, "+str(time.strftime("%m%d%y_%H%M%S"))
 				html = resp.read()
+				if html.strip() == "Please refresh the page to continue...":
+					resp = urllib2.urlopen("http://pastebin.com/"+targ[targ.rfind("=")+1:len(targ)])
+					html = resp.read()
+					start_raw_cut = html.find('<textarea id="paste_code" class="paste_code" name="paste_code" onkeydown="return catchTab(this,event)">')+103
+					end_raw_cut = html[start_raw_cut:len(html)].find('</textarea>')+start_raw_cut
+					html = html[start_raw_cut:end_raw_cut]
 				dump_file = in_path+"\\"+str(time.strftime("%m%d%y_%H%M%S"))+"_"+targ[targ.rfind("=")+1:len(targ)]+".txt"
 				dump_file_fo = open(dump_file, 'w')
 				dump_file_fo.write(html)
