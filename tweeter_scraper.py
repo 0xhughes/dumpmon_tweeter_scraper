@@ -12,7 +12,6 @@ def menu():
 		in_path = raw_input()+"\\tweeter_scraper_out"
 		if os.path.exists(in_path):
 			sane = 0
-			pass
 		else:
 			try:
 				os.mkdir(in_path)
