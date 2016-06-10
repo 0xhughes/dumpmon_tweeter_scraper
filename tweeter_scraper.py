@@ -57,6 +57,8 @@ def main(in_path):
 					resp = urllib2.urlopen(targ)
 				except urllib2.HTTPError:
 					print "[ - ] 404, "+targ+", skipping, "+str(time.strftime("%m%d%y_%H%M%S"))
+					out_log_fo.write(targ+"\n")
+					continue
 				html = resp.read()
 				if html.strip() == "Please refresh the page to continue...":
 					resp = urllib2.urlopen("http://pastebin.com/"+targ[targ.rfind("=")+1:len(targ)])
