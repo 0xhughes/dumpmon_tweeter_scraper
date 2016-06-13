@@ -17,7 +17,7 @@ def menu():
 				os.mkdir(in_path)
 				sane = 0
 			except:
-				os.system('cls')
+				os.system('cls' if os.name == 'nt' else 'clear')
 				print "[ - ] Invalid path, try again."
 	return(in_path)
 
@@ -80,7 +80,7 @@ def main(in_path):
 	out_log_fo.close()
 			
 try:
-		main(menu())
+	main(menu())
 except KeyboardInterrupt:
 	print "[ - ] Interrupt caught, exiting."
 	sys.exit(0)
