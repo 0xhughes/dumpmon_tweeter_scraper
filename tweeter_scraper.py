@@ -33,7 +33,12 @@ def main(in_path):
 			rand = randint(5,180)
 			print "[ - ] Sleeping "+str(rand)+" seconds until check for new items."
 			time.sleep(rand)
-		resp = urllib2.urlopen("https://twitter.com/dumpmon")
+		try:
+			resp = urllib2.urlopen("https://twitter.com/dumpmon")
+		except urllib2.HTTPError:
+			tmp_t = randint(360,720)
+			time.sleep(tmp_t)
+			print "[ - ] Caught 503, sleeping "+str(tmp_t)+" seconds..."
 		html = resp.readlines()
 		out_log = in_path+"\\out_log.txt"
 		out_log_fo = open(out_log, 'a+')
