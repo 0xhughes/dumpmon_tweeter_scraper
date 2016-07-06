@@ -35,10 +35,10 @@ def main(in_path):
 			time.sleep(rand)
 		try:
 			resp = urllib2.urlopen("https://twitter.com/dumpmon")
-		except urllib2.HTTPError:
+		except:
 			tmp_t = randint(360,720)
 			time.sleep(tmp_t)
-			print "[ - ] Caught 503, sleeping "+str(tmp_t)+" seconds..."
+			print "[ - ] Communication error, sleeping "+str(tmp_t)+" seconds..."
 		html = resp.readlines()
 		out_log = in_path+"\\out_log.txt"
 		out_log_fo = open(out_log, 'a+')
