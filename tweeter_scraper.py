@@ -71,7 +71,8 @@ def main(in_path):
 					start_raw_cut = html.find('<textarea id="paste_code" class="paste_code" name="paste_code" onkeydown="return catchTab(this,event)">')+103
 					end_raw_cut = html[start_raw_cut:len(html)].find('</textarea>')+start_raw_cut
 					html = html[start_raw_cut:end_raw_cut]
-				dump_file = in_path+"\\"+str(time.strftime("%m%d%y_%H%M%S"))+"_"+targ[targ.rfind("=")+1:len(targ)]+".txt"
+				time_det = str(time.strftime("%m%d%y_%H%M%S"))
+				dump_file = in_path+"\\"+time_det+'.txt'
 				dump_file_fo = open(dump_file, 'w')
 				dump_file_fo.write(html)
 				dump_file_fo.close()
