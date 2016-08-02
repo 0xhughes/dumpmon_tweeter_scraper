@@ -61,12 +61,19 @@ def main(in_path):
 					time.sleep(randint(1,15))
 					resp = urllib2.urlopen(targ)
 				except urllib2.HTTPError:
-					print "[ - ] 404, "+targ+", skipping, "+str(time.strftime("%m%d%y_%H%M%S"))
-					out_log_fo.write(targ+"\n")
-					continue
+					print "[ - ] Caught a 404, will try one more time in 2-4 minutes..."
+					time.sleep(randint(120,240))
+					try:
+						resp = urllib2.urlopen(targ)
+					except urllib2.HTTPError:
+						print "[ - ] 404, "+targ+", skipping, "+str(time.strftime("%m%d%y_%H%M%S"))
+						out_log_fo.write(targ+"\n")
+						continue
 				html = resp.read()
 				if html.strip() == "Please refresh the page to continue...":
-					resp = urllib2.urlopen("http://pastebin.com/"+targ[targ.rfind("=")+1:len(targ)])
+					page = "http://pastebin.com/"+targ[targ.rfind("=")+1:len(targ)]
+					print "[ - ] Attempting... "+page
+					resp = urllib2.urlopen(page)
 					html = resp.read()
 					start_raw_cut = html.find('<textarea id="paste_code" class="paste_code" name="paste_code" onkeydown="return catchTab(this,event)">')+103
 					end_raw_cut = html[start_raw_cut:len(html)].find('</textarea>')+start_raw_cut
